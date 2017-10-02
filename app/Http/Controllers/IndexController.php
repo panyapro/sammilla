@@ -15,8 +15,7 @@ class IndexController extends Controller {
 
     public function index() {
         $products = Product::select(['id', 'name'])->get();
-
-        return view('page')->with(['products' => $products,
+        return view('client.page')->with(['products' => $products,
                     'header' => $this->header]);
     }
 
@@ -24,6 +23,28 @@ class IndexController extends Controller {
         $product = Product::find($productId);
         return view('product_detail')->with(["product" => $product, 'header' => $this->header]);
     }
+
+    public function show_by_category($categoryId){
+        return view('products_by_category');
+    }
+
+    public function show_by_sub_category($subCategoryId){
+        return view('products_by_sub_category');
+    }
+
+    public function about_us(){
+        return view('about-us');
+    }
+
+    public function cart(){
+        return view('cart');
+    }
+
+    public function search($query){
+        return view('search');
+    }
+
+
     
     public function add(){
         return view('add-content')->with('header', $this->header);
