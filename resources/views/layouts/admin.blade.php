@@ -347,7 +347,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Slimscroll -->
@@ -358,5 +358,8 @@
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+
+@yield('admin-footer-script')
+
 </body>
 </html>

@@ -10,26 +10,24 @@
         </div>
     @endif
     <div class="form">
-        <form method="POST" action="{{route('productStore')}}">
+        <form method="POST">
             <div class="form-group">
                 <label>Название</label>
                 <input type="text" class="form-control" name="name"/>
             </div>
             <div class="form-group">
                 <label>Категория</label>
-                <select class="dropdown">
+                <select class="dropdown category">
                 @foreach($category as $cat)
-                        <option>{{$cat->name}}</option>
+                        <option value="{{ $cat->id }}">{{$cat->name}}</option>
                 @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label>Подкатегория</label>
-                <select class="dropdown">
-                    @foreach($category as $cat)
-                        @foreach($cat->subcategories->limit(10) as $subcat)
-                            <option>{{$subcat->name}}</option>
-                        @endforeach
+                <select class="dropdown subCategory">
+                    @foreach($cat->subcategories as $subcat)
+                        <option>{{$subcat->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -46,4 +44,20 @@
             {{csrf_field()}}
         </form>
     </div>
+@endsection
+
+@section("admin-footer-script")
+    <script>
+        $(".category").on("change", function () {
+            var e = this;
+            $(".subCategory").html("");
+            $.get("/category/sub", {cat_id: $(e).val()}, function (data) {
+                console.log(data);
+                $.each(data, function (i, item) {
+                    $('.subCategory').append("<option value='" + item.id + "'>" + item.name + "</option>");
+                });
+            })
+
+        });
+    </script>
 @endsection
